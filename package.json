@@ -1,0 +1,36 @@
+{
+  "name": "crickit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "crickit": "./bin/crickit.js"
+  },
+  "scripts": {
+    "test": "npm run build; mocha -r ts-node/register tests/**/*.ts",
+    "build": "rm -rf bin/; tsc --outDir bin/",
+    "start": "node bin/crickit.js",
+    "restart": "npm run build; npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.19.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "image-size": "^0.6.3",
+    "moment": "^2.22.2",
+    "request": "^2.88.0",
+    "subsrt": "^1.0.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.12",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.1",
+    "typings": "^2.1.1"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "obscura": {
+    "fontName": "Avenir Next Medium",
+    "alignment": "Center",
+    "outlineColor": "#00000019",
+    "fontSize": 40,
+    "videoFilters": [
+      {
+        "filter": "colorlevels",
+        "options": {
+          "rimin": 0.6,
+          "gimin": 0.6,
+          "bimin": 0.6
+        }
+      },
+      {
+        "filter": "boxblur",
+        "options": {
+          "luma_radius": "min(h,w)/15",
+          "luma_power": 1,
+          "chroma_radius": "min(cw,ch)/15",
+          "chroma_power": 1
+        }
+      }
+    ]
+  },
+  "froyo": {
+    "fontName": "Pacifico",
+    "alignment": "BottomLeft",
+    "outlineColor": "#FFFFFF00",
+    "marginV": 30,
+    "videoFilters": [
+      {
+        "filter": "drawbox",
+        "options": {
+          "y": "ih - 150",
+          "w": "iw", "h": "75",
+          "color": "#00000080",
+          "t": "max"
+        }
+      }
+    ]
+  },
+  "coarse_grind": {
+    "fontName": "Dokdo",
+    "alignment": "Center",
+    "primaryColor": "#000000",
+    "outlineColor": "#FFFFFF",
+    "fontSize": 35
+  },
+  "poppins": {
+    "fontName": "Cherry Swash",
+    "alignment": "BottomLeft",
+    "primaryColor": "#000000",
+    "outlineColor": "#FFFFFF00",
+    "fontSize": 35,
+    "marginV": 7,
+    "videoFilters": [
+      {
+        "filter": "drawbox",
+        "options": {
+          "y": "ih - 225",
+          "w": "iw", "h": "225",
+          "color": "#FFFFFF80",
+          "t": "max"
+        }
+      }
+    ]
+  },
+  "whisper": {
+    "fontName": "Lato Light Italic",
+    "alignment": "BottomCenter",
+    "outlineColor": "#FFFFFF00",
+    "fontSize": 24,
+    "marginV": 7,
+    "videoFilters": [
+      {
+        "filter": "drawbox",
+        "options": {
+          "y": "ih - 90",
+          "w": "iw", "h": "90",
+          "color": "#00000080",
+          "t": "max"
+        }
+      }
+    ]
+  },
+  "engagement": {
+    "fontName": "Airbag Free",
+    "alignment": "Center",
+    "fontSize": 50
+  },
+  "blurb": {
+    "fontName": "Lato Bold",
+    "alignment": "CenterRight",
+    "fontSize": 25
+  },
+  "crane": {
+    "fontName": "Abril Fatface",
+    "alignment": "Center",
+    "outlineColor": "#FFFFFF00",
+    "fontSize": 30,
+    "videoFilters": [
+      {
+        "filter": "drawbox",
+        "options": {
+          "w": "iw", "h": "ih",
+          "color": "#00000064",
+          "t": "max"
+        }
+      }
+    ]
+  },
+  "white_whale": {
+    "fontName": "Vollkorn SC",
+    "alignment": "BottomCenter",
+    "fontSize": 35
+  }
+}
