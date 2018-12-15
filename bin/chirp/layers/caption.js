@@ -90,17 +90,9 @@ var CaptionLayer = /** @class */ (function () {
         });
     };
     CaptionLayer.prototype.addTo = function (project) {
-        console.log(this, this.theme);
-        console.log(this.theme.ssaStyleString);
         if (this.captions.length === 0) {
             return project;
         }
-        console.log({
-            filter: 'subtitles',
-            options: {
-                f: this.localSource,
-            }
-        });
         return project.videoFilter({
             filter: 'subtitles',
             options: {

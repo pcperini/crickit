@@ -67,11 +67,7 @@ var size = /** @class */ (function () {
     };
     size.prototype.scalingFactor = function (max, step) {
         if (step === void 0) { step = 1.0; }
-        var scalingFactor = 10;
-        while ((scalingFactor * Math.max(this.w, this.h)) > max) {
-            scalingFactor -= step;
-        }
-        return scalingFactor;
+        return Math.floor(Math.min(10, max / Math.max(this.w, this.h)));
     };
     return size;
 }());

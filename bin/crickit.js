@@ -38,16 +38,41 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var app = require("commander");
+var fs = require("fs");
+var uuid = require("uuid/v4");
+var chirp_1 = require("./chirp/chirp");
 var main = function () { return __awaiter(_this, void 0, void 0, function () {
+    var inputData;
     return __generator(this, function (_a) {
-        app.version('0.0.1')
-            // .option('-p, --peppers', 'Add peppers')
-            // .option('-P, --pineapple', 'Add pineapple')
-            // .option('-b, --bbq-sauce', 'Add bbq sauce')
-            // .option('-c, --cheese [type]', 'Add the specified type of cheese [marble]', 'marble')
-            .parse(process.argv);
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0:
+                app.version('0.0.1')
+                    .option('-o, --output <path>', 'Output destination')
+                    .parse(process.argv);
+                app.input = app.args[0];
+                inputData = JSON.parse(fs.readFileSync(app.input, 'utf8'));
+                console.log(app.output);
+                return [4 /*yield*/, createChirp(inputData, app.output)];
+            case 1:
+                _a.sent();
+                return [2 /*return*/];
+        }
     });
 }); };
+var createChirp = function (inputData, outputPath) { return __awaiter(_this, void 0, void 0, function () {
+    var chirp;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                chirp = new chirp_1.Chirp(uuid(), inputData.audio.duration, inputData.aspect_ratio, inputData.theme_name, inputData.background, inputData.audio, inputData.captions);
+                return [4 /*yield*/, chirp.save()];
+            case 1:
+                _a.sent();
+                fs.copyFileSync(chirp.localSource, outputPath);
+                return [2 /*return*/];
+        }
+    });
+}); };
+exports.createChirp = createChirp;
 main();
 // brew install ffmpeg --with-fontconfig --with-libass --with-srt

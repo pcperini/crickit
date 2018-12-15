@@ -72,7 +72,6 @@ var VisualLayer = /** @class */ (function () {
                         this.paddedSize = paddedSize;
                         this.endSize = endSize;
                         this.scalingFactor = paddedSize.scalingFactor(15000);
-                        // this.finalScale = this.scalingFactor / 5
                         this.scalingRatio = (Math.max(paddedSize.w, paddedSize.h) / Math.min(startSize.w, startSize.h));
                         this.panDuration = this.durationSeconds * this.fps;
                         this.panDelta = new rectangle_1.size(((startSize.w - endSize.w) / this.panDuration) * this.scalingFactor, ((startSize.h - endSize.h) / this.panDuration) * this.scalingFactor);
