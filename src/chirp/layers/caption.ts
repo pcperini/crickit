@@ -67,19 +67,7 @@ class CaptionLayer implements Captions, Layer {
   }
 
   addTo(project: ffmpeg): ffmpeg {
-    console.log(this, this.theme)
-    console.log(this.theme.ssaStyleString)
     if (this.captions.length === 0) { return project }
-
-    console.log({
-      filter: 'subtitles',
-      options: {
-        f: this.localSource,
-        // force_style: this.theme.ssaStyleString,
-        // fontsdir: '../assets/fonts'
-      }
-    })
-
     return project.videoFilter({
       filter: 'subtitles',
       options: {

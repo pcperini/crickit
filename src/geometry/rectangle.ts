@@ -69,11 +69,7 @@ class size {
   }
 
   scalingFactor(max: number, step: number = 1.0): number {
-    var scalingFactor = 10
-    while((scalingFactor * Math.max(this.w, this.h)) > max) {
-      scalingFactor -= step
-    }
-    return scalingFactor
+    return Math.floor(Math.min(10, max / Math.max(this.w, this.h)))
   }
 }
 

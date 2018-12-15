@@ -60,7 +60,6 @@ class VisualLayer implements Visual, Layer {
     this.endSize = endSize
 
     this.scalingFactor = paddedSize.scalingFactor(15000)
-    // this.finalScale = this.scalingFactor / 5
     this.scalingRatio = (
       Math.max(paddedSize.w, paddedSize.h) / Math.min(startSize.w, startSize.h)
     )
