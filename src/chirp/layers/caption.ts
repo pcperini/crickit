@@ -20,7 +20,7 @@ class Subtitle {
 class Caption {
   text: string
   start?: string
-  duration: string
+  end: string
 }
 
 class CaptionLayer implements Captions, Layer {
@@ -39,15 +39,15 @@ class CaptionLayer implements Captions, Layer {
     const subtitles: Subtitle[] = this.captions.map((c, i) => {
       const last = (i > 0 ?
         this.captions[i - 1] :
-        { start: '00:00', duration: '00:00' })
+        { end: '00:00' })
 
       const start = (c.start ?
         moment.duration(`00:${c.start}`).asSeconds() * 1000 :
-        moment.duration(`00:${last.start}`).asSeconds() * 1000 +
-        moment.duration(`00:${last.duration}`).asSeconds() * 1000)
+        moment.duration(`00:${last.end}`).asSeconds() * 1000)
 
-      const end = start + (
-        moment.duration(`00:${c.duration}`).asSeconds() * 1000
+      const end = (
+        start +
+        moment.duration(`00:${c.end}`).asSeconds() * 1000
       )
 
       return {
