@@ -4,9 +4,7 @@ import * as app from 'commander'
 import * as fs from 'fs'
 import * as uuid from 'uuid/v4'
 import { Chirp } from './chirp/chirp'
-import { size } from './geometry/rectangle'
 import { Theme } from './chirp/theme'
-import { TextAlignment } from './chirp/theme'
 
 function validate<T>(value: T,
   error: string,
@@ -61,5 +59,7 @@ const main = async () => {
 }
 
 main()
+
+export { Chirp, Theme }
 
 // brew install ffmpeg --with-fontconfig --with-libass --with-srt
