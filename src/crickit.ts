@@ -15,7 +15,7 @@ function validate<T>(value: T,
 }
 
 const main = async () => {
-  app.version('1.0.1')
+  app.version('1.0.2')
     .option('-a, --audioSource <path>', 'Path to audio')
     .option('-s, --audioStart <hh:mm:ss.ss>',
       'Timestamp to start audio',
