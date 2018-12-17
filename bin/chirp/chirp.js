@@ -71,7 +71,7 @@ var Chirp = /** @class */ (function () {
                                         '-profile:v baseline',
                                         '-level 3'
                                     ]);
-                                    project.on('error', function (err) { console.log(err); reject(err); })
+                                    project.on('error', function (err) { console.error(err); reject(err); })
                                         .on('end', function () { return resolve(_this.localSource); })
                                         .save(this.localSource);
                                     return [2 /*return*/];

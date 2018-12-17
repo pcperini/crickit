@@ -30,7 +30,6 @@ function toCamelCase(value) {
         .replace(/\s/g, '')
         .replace(/^(.)/, function (i) { return i.toUpperCase(); });
 }
-exports.toCamelCase = toCamelCase;
 var BorderStyle;
 (function (BorderStyle) {
     BorderStyle[BorderStyle["Outline"] = 1] = "Outline";

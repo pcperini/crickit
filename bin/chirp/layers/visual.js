@@ -98,7 +98,6 @@ var VisualLayer = /** @class */ (function () {
                     d: this.panDuration
                 } }
         ];
-        console.log(filters);
         project = project.input(this.localSource)
             .loop(this.durationSeconds);
         return filters.reduce(function (p, filter) { return p.videoFilter(filter); }, project)
