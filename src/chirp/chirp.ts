@@ -51,7 +51,7 @@ class Chirp {
             '-level 3'
           ])
 
-        project.on('error', (err) => { console.log(err); reject(err) })
+        project.on('error', (err) => { console.error(err); reject(err) })
           .on('end', () => resolve(this.localSource))
           .save(this.localSource)
       })
