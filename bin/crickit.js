@@ -41,38 +41,48 @@ var app = require("commander");
 var fs = require("fs");
 var uuid = require("uuid/v4");
 var chirp_1 = require("./chirp/chirp");
+var theme_1 = require("./chirp/theme");
+function validate(value, error, test) {
+    if (test === void 0) { test = function () { return (!!value); }; }
+    if (test(value)) {
+        return value;
+    }
+    console.error(error);
+    process.exit(1);
+}
 var main = function () { return __awaiter(_this, void 0, void 0, function () {
-    var inputData;
+    var duration, audioSource, pictureSource, outputPath, captions, captionsContents, chirp;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 app.version('0.0.1')
+                    .option('-a, --audioSource <path>', 'Path to audio')
+                    .option('-s, --audioStart <hh:mm:ss.ss>', 'Timestamp to start audio', '00:00:00.00')
+                    .option('-p, --pictureSource <path>', 'Path to picture')
+                    .option('-d, --duration <mm:ss.ss>', 'Output duration')
                     .option('-o, --output <path>', 'Output destination')
+                    .option('-c, --captionSource <path>', 'Path to captions JSON file')
+                    .option('--aspectRatio <ratio>', 'Output aspect ratio', '1:1')
+                    .option('--theme <name>', "Theme name. One of: " + Object.keys(theme_1.Theme.sampleThemes), 'obscura')
                     .parse(process.argv);
-                app.input = app.args[0];
-                inputData = JSON.parse(fs.readFileSync(app.input, 'utf8'));
-                console.log(app.output);
-                return [4 /*yield*/, createChirp(inputData, app.output)];
-            case 1:
-                _a.sent();
-                return [2 /*return*/];
-        }
-    });
-}); };
-var createChirp = function (inputData, outputPath) { return __awaiter(_this, void 0, void 0, function () {
-    var chirp;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                chirp = new chirp_1.Chirp(uuid(), inputData.audio.duration, inputData.aspect_ratio, inputData.theme_name, inputData.background, inputData.audio, inputData.captions);
+                duration = validate(app.duration, 'Duration must not be null');
+                audioSource = validate(app.audioSource, 'Audio Source must not be null');
+                pictureSource = validate(app.pictureSource, 'Picture Source must not be null');
+                outputPath = validate(app.output, 'Output Path must not be null');
+                captions = [];
+                if (app.captionSource) {
+                    captionsContents = fs.readFileSync(app.captionSource, 'utf8');
+                    captions = JSON.parse(captionsContents);
+                }
+                console.log(app.duration, app.aspectRatio, app.theme, { source: pictureSource, duration: app.duration }, { source: audioSource, start: app.audioStart, duration: app.duration }, captions);
+                chirp = new chirp_1.Chirp(uuid(), app.duration, app.aspectRatio, app.theme, { source: pictureSource, duration: app.duration }, { source: audioSource, start: app.audioStart, duration: app.duration }, captions);
                 return [4 /*yield*/, chirp.save()];
             case 1:
                 _a.sent();
-                fs.copyFileSync(chirp.localSource, outputPath);
+                fs.copyFileSync(chirp.localSource, app.output);
                 return [2 /*return*/];
         }
     });
 }); };
-exports.createChirp = createChirp;
 main();
 // brew install ffmpeg --with-fontconfig --with-libass --with-srt

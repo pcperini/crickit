@@ -49,11 +49,11 @@ var size = /** @class */ (function () {
         var endSize;
         var paddedSize;
         var rnd = Math.ceil;
-        if (aspectRatio.w > aspectRatio.h) {
+        if (aspectRatio.w < aspectRatio.h) {
             paddedSize = new size(rnd((this.h * aspectRatio.w) / aspectRatio.h), this.h);
-            endSize = new size(this.w, rnd((this.w * aspectRatio.h)) / aspectRatio.w);
+            endSize = new size(this.w, rnd((this.w * aspectRatio.h) / aspectRatio.w));
         }
-        else if (aspectRatio.w < aspectRatio.h) {
+        else if (aspectRatio.w > aspectRatio.h) {
             paddedSize = new size(this.w, rnd((this.w * aspectRatio.h) / aspectRatio.w));
             endSize = new size(rnd((this.h * aspectRatio.w) / aspectRatio.h), this.h);
         }

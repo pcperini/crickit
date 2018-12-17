@@ -63,12 +63,12 @@ var CaptionLayer = /** @class */ (function () {
                 subtitles = this.captions.map(function (c, i) {
                     var last = (i > 0 ?
                         _this.captions[i - 1] :
-                        { start: '00:00', duration: '00:00' });
+                        { end: '00:00' });
                     var start = (c.start ?
                         moment.duration("00:" + c.start).asSeconds() * 1000 :
-                        moment.duration("00:" + last.start).asSeconds() * 1000 +
-                            moment.duration("00:" + last.duration).asSeconds() * 1000);
-                    var end = start + (moment.duration("00:" + c.duration).asSeconds() * 1000);
+                        moment.duration("00:" + last.end).asSeconds() * 1000);
+                    var end = (start +
+                        moment.duration("00:" + c.end).asSeconds() * 1000);
                     return {
                         text: c.text,
                         start: start,
