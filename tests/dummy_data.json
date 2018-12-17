@@ -14,9 +14,9 @@
   "captions": [{
     "text": "When I was young young",
     "start": "00:01.00",
-    "duration": "00:02.01"
+    "end": "00:03.01"
   }, {
     "text": "When I was young young",
-    "duration": "00:01.00"
+    "end": "00:04.01"
   }]
 }

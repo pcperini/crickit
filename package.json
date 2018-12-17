@@ -7,7 +7,7 @@
     "crickit": "./bin/crickit.js"
   },
   "scripts": {
-    "test": "npm run build; mocha -r ts-node/register tests/**/*.ts",
+    "test": "npm run build;istanbul cover -e .ts _mocha -- --compilers ts:ts-node/register tests/**/*.ts",
     "build": "rm -rf bin/; tsc --outDir bin/",
     "start": "node bin/crickit.js",
     "restart": "npm run build; npm start"
@@ -29,7 +29,9 @@
     "@types/mocha": "^5.2.5",
     "@types/node": "^10.12.12",
     "chai": "^4.2.0",
+    "istanbul": "^1.1.0-alpha.1",
     "mocha": "^5.2.0",
+    "source-map-support": "^0.5.9",
     "ts-node": "^7.0.1",
     "typings": "^2.1.1"
   }
