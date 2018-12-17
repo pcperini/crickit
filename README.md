@@ -23,7 +23,7 @@ Options:
 Install: `npm install --save crickit`
 
 Usage:
-```
+```js
 const chirp = new Chirp("some-unique-id",
   "00:14.00",
   "1:1",
