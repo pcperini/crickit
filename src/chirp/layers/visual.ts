@@ -84,21 +84,18 @@ class VisualLayer implements Visual, Layer {
         x: `x+${this.panDelta.w}`,
         y: `y+${this.panDelta.h}`,
         s: (
-          `${this.endSize.w * this.scalingRatio}x` +
-          `${this.endSize.h * this.scalingRatio}`
+          `${this.endSize.w * this.scalingFactor}x` +
+          `${this.endSize.h * this.scalingFactor}`
         ),
         fps: this.fps,
         d: this.panDuration
-      }},
-      { filter: 'scale', options: {
-        w: `${this.endSize.w}+1`,
-        h: `${this.endSize.h}+1`
-      }},
+      }}
     ]
 
     project = project.input(this.localSource)
       .loop(this.durationSeconds)
     return filters.reduce((p, filter) => p.videoFilter(filter), project)
+      .size(`${this.endSize.w}x${this.endSize.h}`)
   }
 }
 
