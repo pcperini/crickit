@@ -1,8 +1,8 @@
 {
   "name": "crickit",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
-  "main": "bin/crickit.js",
+  "main": "bin/module.js",
   "bin": {
     "crickit": "./bin/crickit.js"
   },

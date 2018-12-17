@@ -15,7 +15,7 @@ function validate<T>(value: T,
 }
 
 const main = async () => {
-  app.version('1.0.3')
+  app.version('1.0.4')
     .option('-a, --audioSource <path>', 'Path to audio')
     .option('-s, --audioStart <hh:mm:ss.ss>',
       'Timestamp to start audio',
@@ -59,7 +59,5 @@ const main = async () => {
 }
 
 main()
-
-export { Chirp, Theme }
 
 // brew install ffmpeg --with-fontconfig --with-libass --with-srt

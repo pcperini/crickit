@@ -41,9 +41,7 @@ var app = require("commander");
 var fs = require("fs");
 var uuid = require("uuid/v4");
 var chirp_1 = require("./chirp/chirp");
-exports.Chirp = chirp_1.Chirp;
 var theme_1 = require("./chirp/theme");
-exports.Theme = theme_1.Theme;
 function validate(value, error, test) {
     if (test === void 0) { test = function () { return (!!value); }; }
     if (test(value)) {
@@ -57,7 +55,7 @@ var main = function () { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                app.version('1.0.3')
+                app.version('1.0.4')
                     .option('-a, --audioSource <path>', 'Path to audio')
                     .option('-s, --audioStart <hh:mm:ss.ss>', 'Timestamp to start audio', '00:00:00.00')
                     .option('-p, --pictureSource <path>', 'Path to picture')
