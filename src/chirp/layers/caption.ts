@@ -73,7 +73,7 @@ class CaptionLayer implements Captions, Layer {
       options: {
         f: this.localSource,
         force_style: this.theme.ssaStyleString,
-        fontsdir: './assets/fonts'
+        fontsdir: this.theme.fontPath
       }
     })
   }

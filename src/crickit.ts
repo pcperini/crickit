@@ -4,7 +4,7 @@ import * as app from 'commander'
 import * as fs from 'fs'
 import * as uuid from 'uuid/v4'
 import { Chirp } from './chirp/chirp'
-import { Theme } from './chirp/theme'
+import { Theme, TextAlignment, Color } from './chirp/theme'
 
 function validate<T>(value: T,
   error: string,
@@ -26,8 +26,20 @@ const main = async () => {
     .option('-c, --captionSource <path>', 'Path to captions JSON file')
     .option('--aspectRatio <ratio>', 'Output aspect ratio', '1:1')
     .option('--theme <name>',
-      `Theme name. One of: ${Object.keys(Theme.sampleThemes)}`,
-      'obscura')
+      `Theme name. One of: ${Object.keys(Theme.sampleThemes)}`)
+    .option('-t', 'Use a custom theme. Requires --theme[Property] options')
+    .option('--themeFontName <name>', 'Name of font family')
+    .option('--themeFont <path>', 'Path to font file')
+    .option('--themeFontSize <size>', 'Font size', parseInt)
+    .option('--themeAlignment <alignment>',
+      `Alignment. One of: ${Object.keys(TextAlignment)}`,
+      (a) => TextAlignment.fromString)
+    .option('--themePrimaryColor <#RRGGBB>',
+      'Text color',
+      (c) => (new Color(c)))
+    .option('--themeOutlineColor <#RRGGBB>',
+      'Outline color',
+      (c) => (new Color(c)))
     .parse(process.argv)
 
   const duration: string = validate(app.duration,
@@ -45,10 +57,27 @@ const main = async () => {
     captions = JSON.parse(captionsContents)
   }
 
+  // Coerce theme
+  var theme: Theme
+  if (app.theme && !app.t) {
+    theme = Theme.sampleThemes[app.theme]
+  } else if (app.t && !app.theme) {
+    theme = new Theme()
+    theme.fontName = validate(app.themeFontName, 'Font name must not be null')
+    theme.fontPath = validate(app.themeFont, 'Font path must not be null')
+    theme.alignment = app.themeAlignment
+    theme.primaryColor = app.themePrimaryColor
+    theme.outlineColor = app.themeOutlineColor
+    theme.fontSize = app.themeFontSize
+  } else {
+    console.error('Cannot use custom theme (-t) with default theme (--theme)')
+    process.exit(1)
+  }
+
   const chirp = new Chirp(uuid(),
     app.duration,
     app.aspectRatio,
-    app.theme,
+    theme,
     { source: pictureSource, duration: app.duration },
     { source: audioSource, start: app.audioStart, duration: app.duration },
     captions

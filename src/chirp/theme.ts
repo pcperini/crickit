@@ -3,19 +3,21 @@ interface StyleType {
 }
 
 enum TextAlignment {
-  BottomLeft = 1,
-  BottomCenter,
-  BottomRight,
-  TopLeft,
-  TopCenter,
-  TopRight,
-  CenterLeft,
-  Center,
-  CenterRight
+    BottomLeft = 1,
+    BottomCenter,
+    BottomRight,
+    TopLeft,
+    TopCenter,
+    TopRight,
+    CenterLeft,
+    Center,
+    CenterRight
 }
 
-function textAlignmentFromString(value: string): TextAlignment {
-  return TextAlignment[value]
+namespace TextAlignment {
+   export function fromString(value: string): TextAlignment {
+    return TextAlignment[value]
+  }
 }
 
 function toCamelCase(value: string): string {
@@ -62,6 +64,7 @@ class Theme {
     }), {})
 
   fontName: string
+  fontPath: string = './assets/fonts'
   alignment: TextAlignment
   primaryColor: Color
   outlineColor: Color
@@ -119,7 +122,7 @@ class Theme {
   private static fromObj(obj: any): Theme {
     const theme = new Theme()
     theme.fontName = obj.fontName || 'Open Sans Bold'
-    theme.alignment = textAlignmentFromString(obj.alignment || 'BottomCenter')
+    theme.alignment = TextAlignment.fromString(obj.alignment || 'BottomCenter')
     theme.primaryColor = new Color(obj.primaryColor || '#FFFFFF')
     theme.outlineColor = new Color(obj.outlineColor || '#000000')
     theme.fontSize = obj.fontSize || 24

@@ -15,7 +15,7 @@ class Chirp {
   constructor(id: string,
     duration: string,
     aspectRatio: string,
-    themeName: string,
+    theme: Theme,
     videoInfo: Visual,
     audioInfo: Audio,
     captions: Caption[]) {
@@ -33,7 +33,7 @@ class Chirp {
         audioInfo.duration))
 
       this.layers.push(new CaptionLayer(id,
-        Theme.sampleThemes[themeName],
+        theme,
         captions))
     }
 
