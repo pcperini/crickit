@@ -51,7 +51,7 @@ function validate(value, error, test) {
     process.exit(1);
 }
 var main = function () { return __awaiter(_this, void 0, void 0, function () {
-    var duration, audioSource, pictureSource, outputPath, captions, captionsContents, chirp;
+    var duration, audioSource, pictureSource, outputPath, captions, captionsContents, theme, chirp;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -63,7 +63,14 @@ var main = function () { return __awaiter(_this, void 0, void 0, function () {
                     .option('-o, --output <path>', 'Output destination')
                     .option('-c, --captionSource <path>', 'Path to captions JSON file')
                     .option('--aspectRatio <ratio>', 'Output aspect ratio', '1:1')
-                    .option('--theme <name>', "Theme name. One of: " + Object.keys(theme_1.Theme.sampleThemes), 'obscura')
+                    .option('--theme <name>', "Theme name. One of: " + Object.keys(theme_1.Theme.sampleThemes))
+                    .option('-t', 'Use a custom theme. Requires --theme[Property] options')
+                    .option('--themeFontName <name>', 'Name of font family')
+                    .option('--themeFont <path>', 'Path to font file')
+                    .option('--themeFontSize <size>', 'Font size', parseInt)
+                    .option('--themeAlignment <alignment>', "Alignment. One of: " + Object.keys(theme_1.TextAlignment), function (a) { return theme_1.TextAlignment.fromString; })
+                    .option('--themePrimaryColor <#RRGGBB>', 'Text color', function (c) { return (new theme_1.Color(c)); })
+                    .option('--themeOutlineColor <#RRGGBB>', 'Outline color', function (c) { return (new theme_1.Color(c)); })
                     .parse(process.argv);
                 duration = validate(app.duration, 'Duration must not be null');
                 audioSource = validate(app.audioSource, 'Audio Source must not be null');
@@ -74,7 +81,23 @@ var main = function () { return __awaiter(_this, void 0, void 0, function () {
                     captionsContents = fs.readFileSync(app.captionSource, 'utf8');
                     captions = JSON.parse(captionsContents);
                 }
-                chirp = new chirp_1.Chirp(uuid(), app.duration, app.aspectRatio, app.theme, { source: pictureSource, duration: app.duration }, { source: audioSource, start: app.audioStart, duration: app.duration }, captions);
+                if (app.theme && !app.t) {
+                    theme = theme_1.Theme.sampleThemes[app.theme];
+                }
+                else if (app.t && !app.theme) {
+                    theme = new theme_1.Theme();
+                    theme.fontName = validate(app.themeFontName, 'Font name must not be null');
+                    theme.fontPath = validate(app.themeFont, 'Font path must not be null');
+                    theme.alignment = app.themeAlignment;
+                    theme.primaryColor = app.themePrimaryColor;
+                    theme.outlineColor = app.themeOutlineColor;
+                    theme.fontSize = app.themeFontSize;
+                }
+                else {
+                    console.error('Cannot use custom theme (-t) with default theme (--theme)');
+                    process.exit(1);
+                }
+                chirp = new chirp_1.Chirp(uuid(), app.duration, app.aspectRatio, theme, { source: pictureSource, duration: app.duration }, { source: audioSource, start: app.audioStart, duration: app.duration }, captions);
                 return [4 /*yield*/, chirp.save()];
             case 1:
                 _a.sent();

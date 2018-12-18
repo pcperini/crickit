@@ -39,16 +39,15 @@ var ffmpeg = require("fluent-ffmpeg");
 var visual_1 = require("./layers/visual");
 var audio_1 = require("./layers/audio");
 var caption_1 = require("./layers/caption");
-var theme_1 = require("./theme");
 var rectangle_1 = require("../geometry/rectangle");
 var Chirp = /** @class */ (function () {
-    function Chirp(id, duration, aspectRatio, themeName, videoInfo, audioInfo, captions) {
+    function Chirp(id, duration, aspectRatio, theme, videoInfo, audioInfo, captions) {
         this.project = ffmpeg();
         this.layers = [];
         this.localSource = "/tmp/ffmpeg/" + id + ".mp4";
         this.layers.push(new visual_1.VisualLayer(id, videoInfo.source, rectangle_1.size.fromString(aspectRatio), videoInfo.duration, videoInfo.crop));
         this.layers.push(new audio_1.AudioLayer(id, audioInfo.source, audioInfo.start, audioInfo.duration));
-        this.layers.push(new caption_1.CaptionLayer(id, theme_1.Theme.sampleThemes[themeName], captions));
+        this.layers.push(new caption_1.CaptionLayer(id, theme, captions));
     }
     Chirp.prototype.save = function () {
         return __awaiter(this, void 0, void 0, function () {

@@ -4,6 +4,7 @@ import * as fs from 'fs'
 import * as uuid from 'uuid/v4'
 
 import { Chirp } from '../src/chirp/chirp'
+import { Theme } from '../src/chirp/theme'
 
 describe('Chirp', () => {
   const testData = {
@@ -22,10 +23,10 @@ describe('Chirp', () => {
     captions: [{
       text: "When I was young young",
       start: "00:01.00",
-      duration: "00:02.01"
+      end: "00:03.01"
     }, {
       text: "When I was young young",
-      duration: "00:01.00"
+      end: "00:04.01"
     }]
   }
 
@@ -34,7 +35,7 @@ describe('Chirp', () => {
     const chirp = new Chirp(uuid(),
       testData.audio.duration,
       testData.aspect_ratio,
-      testData.theme_name,
+      Theme.sampleThemes[testData.theme_name],
       testData.background,
       testData.audio,
       testData.captions)

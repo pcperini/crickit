@@ -72,7 +72,7 @@ class Theme {
   videoFilters: any[]
 
   get styles(): any {
-    const skipStyles = ['VideoFilters']
+    const skipStyles = ['VideoFilters', 'FontPath']
     const validStyles = [
       'Name', 'Encoding',
       'FontName', 'FontSize',

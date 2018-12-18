@@ -21,9 +21,13 @@ var TextAlignment;
     TextAlignment[TextAlignment["CenterRight"] = 9] = "CenterRight";
 })(TextAlignment || (TextAlignment = {}));
 exports.TextAlignment = TextAlignment;
-function textAlignmentFromString(value) {
-    return TextAlignment[value];
-}
+(function (TextAlignment) {
+    function fromString(value) {
+        return TextAlignment[value];
+    }
+    TextAlignment.fromString = fromString;
+})(TextAlignment || (TextAlignment = {}));
+exports.TextAlignment = TextAlignment;
 function toCamelCase(value) {
     return value
         .replace(/\s(.)/g, function (i) { return i.toUpperCase(); })
@@ -64,6 +68,7 @@ var Color = /** @class */ (function () {
 exports.Color = Color;
 var Theme = /** @class */ (function () {
     function Theme() {
+        this.fontPath = './assets/fonts';
     }
     Object.defineProperty(Theme.prototype, "styles", {
         get: function () {
@@ -116,7 +121,7 @@ var Theme = /** @class */ (function () {
     Theme.fromObj = function (obj) {
         var theme = new Theme();
         theme.fontName = obj.fontName || 'Open Sans Bold';
-        theme.alignment = textAlignmentFromString(obj.alignment || 'BottomCenter');
+        theme.alignment = TextAlignment.fromString(obj.alignment || 'BottomCenter');
         theme.primaryColor = new Color(obj.primaryColor || '#FFFFFF');
         theme.outlineColor = new Color(obj.outlineColor || '#000000');
         theme.fontSize = obj.fontSize || 24;

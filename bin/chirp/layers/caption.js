@@ -98,7 +98,7 @@ var CaptionLayer = /** @class */ (function () {
             options: {
                 f: this.localSource,
                 force_style: this.theme.ssaStyleString,
-                fontsdir: './assets/fonts'
+                fontsdir: this.theme.fontPath
             }
         });
     };
